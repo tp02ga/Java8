@@ -5,8 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Function;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -22,7 +25,7 @@ public class LambdaExample
     for (int i=0; i<200; i++)
       transactions.add(buildTransaction());
     
-    System.out.println(transactions);
+//    System.out.println(transactions);
     
 //    Collections.sort(transactions, new Comparator<Transaction>() {@Override public int compare(Transaction t1, Transaction t2) { return t1.getDate().compareTo(t2.getDate()); }});
 //    
@@ -33,9 +36,42 @@ public class LambdaExample
 //    Collections.sort(transactions, (t1, t2) -> t1.getDate().compareTo(t2.getDate()));
     
    //  A::B   (A = class name, B = method name)
-    Collections.sort(transactions, Comparator.comparing(Transaction::getId));
+//    Collections.sort(transactions, Comparator.comparing(Transaction::getId));
     
-    System.out.println(transactions);
+//    for (Transaction transaction : transactions) { System.out.println(transaction); }
+  
+//    transactions.stream().forEach(System.out::println);
+    
+//    long sumOfTxnIds = 0L;
+//    for (Transaction transaction : transactions)
+//    {
+//      sumOfTxnIds += transaction.getId();
+//    }
+//    
+//    System.out.println(sumOfTxnIds);
+//    
+//    sumOfTxnIds = transactions.stream()
+//                              .mapToLong(Transaction::getId)
+//                              .sum();
+//    
+//    System.out.println(sumOfTxnIds);
+    
+//    List<Transaction> txnsBiggerThan500 = transactions.stream()
+//                                                      .filter(t -> t.getAmount() > 500.0)
+//                                                      .collect(Collectors.toList());
+//    
+//    System.out.println(txnsBiggerThan500);
+    
+    Optional<Transaction> firstTxnAfterTodayOpt = transactions.stream()
+                                                              .sorted(Comparator.comparing(Transaction::getDate))
+                                                              .filter(t -> t.getDate().after(new Date()))
+                                                              .findFirst();
+    if (firstTxnAfterTodayOpt.isPresent())
+    {
+      System.out.println(firstTxnAfterTodayOpt.get());
+    }
+                
+    
   }
   
   private Transaction buildTransaction() 
