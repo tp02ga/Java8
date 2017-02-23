@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
 
 import org.junit.Test;
 
@@ -23,18 +24,21 @@ public class LambdaExample
     
     System.out.println(transactions);
     
-    Collections.sort(transactions, new Comparator<Transaction>() {
-      @Override
-      public int compare(Transaction t1, Transaction t2)
-      {
-        return t1.getDate().compareTo(t2.getDate());
-      }});
+//    Collections.sort(transactions, new Comparator<Transaction>() {
+//      @Override
+//      public int compare(Transaction t1, Transaction t2)
+//      {
+//        return t1.getDate().compareTo(t2.getDate());
+//      }});
+//    
+//    Collections.sort(transactions, (Transaction t1, Transaction t2) -> {return t1.getDate().compareTo(t2.getDate());});
+//    
+//    Collections.sort(transactions, (t1, t2) -> {return t1.getDate().compareTo(t2.getDate());});
+//    
+//    Collections.sort(transactions, (t1, t2) -> t1.getDate().compareTo(t2.getDate()));
     
-    Collections.sort(transactions, (Transaction t1, Transaction t2) -> {return t1.getDate().compareTo(t2.getDate());});
-    
-    Collections.sort(transactions, (t1, t2) -> {return t1.getDate().compareTo(t2.getDate());});
-    
-    Collections.sort(transactions, (t1, t2) -> t1.getDate().compareTo(t2.getDate()));
+   //  A::B   (A = class name, B = method name)
+    Collections.sort(transactions, Comparator.comparing(Transaction::getId));
     
     System.out.println(transactions);
   }
