@@ -24,12 +24,7 @@ public class LambdaExample
     
     System.out.println(transactions);
     
-//    Collections.sort(transactions, new Comparator<Transaction>() {
-//      @Override
-//      public int compare(Transaction t1, Transaction t2)
-//      {
-//        return t1.getDate().compareTo(t2.getDate());
-//      }});
+//    Collections.sort(transactions, new Comparator<Transaction>() {@Override public int compare(Transaction t1, Transaction t2) { return t1.getDate().compareTo(t2.getDate()); }});
 //    
 //    Collections.sort(transactions, (Transaction t1, Transaction t2) -> {return t1.getDate().compareTo(t2.getDate());});
 //    
